@@ -7,7 +7,7 @@ import com.example.archetypespringboot.user.domain.usecases.GetUserUseCase;
 import com.example.archetypespringboot.user.domain.usecases.SaveUserUseCase;
 import com.example.archetypespringboot.user.infrastructure.adapters.persistence.UserPersistenceAdapter;
 import com.example.archetypespringboot.user.infrastructure.mappers.UserEntityMapper;
-import com.example.archetypespringboot.user.infrastructure.repositories.mysql.UserRepository;
+import com.example.archetypespringboot.user.infrastructure.repositories.postgresql.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

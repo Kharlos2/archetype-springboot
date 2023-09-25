@@ -3,7 +3,7 @@ package com.example.archetypespringboot.user.infrastructure.adapters.persistence
 import com.example.archetypespringboot.user.domain.models.UserModel;
 import com.example.archetypespringboot.user.domain.ports.out.UserPersistencePort;
 import com.example.archetypespringboot.user.infrastructure.mappers.UserEntityMapper;
-import com.example.archetypespringboot.user.infrastructure.repositories.mysql.UserRepository;
+import com.example.archetypespringboot.user.infrastructure.repositories.postgresql.UserRepository;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 
