@@ -4,73 +4,73 @@
 ![Apache License, Version 2.0, January 2004](https://img.shields.io/github/license/apache/maven.svg?label=License)
 ![Jenkins Status](https://img.shields.io/jenkins/s/https/ci-maven.apache.org/job/Maven/job/maven-box/job/maven-archetype/job/master.svg?)
 
-## 📚 Description
+## 📚 Descripción
 
-This project is an archetype that follows a specific 
-organizational structure to facilitate application development for spring boot. A hexagonal
-architecture implementing vertical slicing focused on microservices. 
-The project structure is designed to clearly separate different 
-layers of the application and promote good practices.
+Este proyecto es un arquetipo que sigue un objetivo específico.
+Es una estructura organizada para facilitar el desarrollo de aplicaciones Spring Boot. Se usa una arquitecura
+hexagonal que implementa slicing vertical enfocado a microservicios.
+La estructura del proyecto está diseñada para separar claramente los diferentes
+capas de la aplicación y promover buenas prácticas.
 
-## 🚀 How to Use This Archetype
+## 🚀 Como usar este arquetipo
 
-1. Install Java SE Development Kit 11.0.19. [Downloader](https://www.oracle.com/co/java/technologies/javase/jdk11-archive-downloads.html#license-lightbox)
-2. Clone this repository: `git clone https://github.com/pragma/webflux-archetype.git`
-3. Execute some [Gradle lifecycle tasks](https://docs.gradle.org/current/userguide/java_plugin.html#lifecycle_tasks) in order to check everything is OK:
-    1. Create [the project JAR](https://docs.gradle.org/current/userguide/java_plugin.html#sec:jar) and other project artifacts:
+1. Instala Java SE Development Kit 11.0.19. [Downloader](https://www.oracle.com/co/java/technologies/javase/jdk11-archive-downloads.html#license-lightbox)
+2. Clona este repositorio: `git clone https://github.com/pragma/webflux-archetype.git`
+3. Ejecute algunas [tareas del ciclo de vida de Gradle](https://docs.gradle.org/current/userguide/java_plugin.html#lifecycle_tasks) en orden para verificar que todo este OK:
+    1. Cree [el JAR del proyecto](https://docs.gradle.org/current/userguide/java_plugin.html#sec:jar) y otros artefactos del proyecto:
        `./gradlew assemble --warning-mode all`
-    2. Run the tests and plugins verification tasks:
+    2. Ejecute las tareas de verificación de pruebas y complementos:
        `./gradlew check --warning-mode all`
-    3. Execute the main application entrypoint:
+    3. Ejecute el punto de entrada de la aplicacion principal:
        `./gradlew build`
-4. ¡Start developing!
+4. ¡Empieza el desarrollo!
 
-   
-## 📁 Project Structure
 
-The skeleton uses the following folder structure::
+## 📁 Estructura del proyecto
+
+El esqueleto utiliza la siguiente estructura de carpetas::
 
 **module**
-- **application**: Application layer for controller DTOs.
-    - **dtos**: Definition of requests and responses.
-        - **requests**: Information reception formats that the controller will receive.
-        - **responses**: Response format that will be displayed as the controller response.
-    - **servicehandler**: Controllers and request handlers.
-    - **dtomapper**: Mappers to convert between domain objects and DTOs.
-    - **exception**: Generate and handle exceptions for the controller.
+- **application**: Capa de aplicación para DTO controladores.
+    - **dtos**: Definición de peticiones(requests) y respuestas(responses).
+        - **requests**: Formatos de recepción de información que el controlador recibirá.
+        - **responses**: Formato de respuesta que se mostrará como respuesta del controlador.
+    - **servicehandler**: Controladores y manipuladores de peticiones.
+    - **dtomapper**: Mapeadores para convertir entre objetos de dominio y DTOs.
+    - **exception**: Generar y manejar excepciones para el controlador.
 
-- **domain**: Domain logic and business entities.
-    - **exceptions**: Generate and handle exceptions for domain logic.
-    - **models**: Domain data models.
-      - **ports**: Application ports.
-        - **in**: Input ports for use cases.
-        - **out**: Output ports for use cases.
+- **domain**: Lógica de dominio y entidades comerciales.
+    - **exceptions**: Generar y manejar excepciones para la lógica de dominio.
+    - **models**: Modelos de datos de dominio
+        - **ports**: Puertos de aplicación.
+            - **in**: Puertos de entrada para casos de uso estos conectan con los servicios.
+            - **out**: Puertos de salida para casos de uso estos conectan con los adapter.
 
-  - **usecases**: Use cases of the application.
-  - **utils**: Common utilities.
-    - **constants**: Application constants.
-    - **validations**: Data validations.
+    - **usecases**: Casos de uso de la aplicación aqui esta la lógica.
+    - **utils**: Utilidades comunes.
+        - **constants**: Constantes de la aplicación.
+        - **validations**: Validaciones de datos.
 
-- **infrastructure**: Application infrastructure.
-    - **adapters**: Adapters to connect with external systems.
-      - **external**: External integrations.
-      - **persistence**: Persistence layer.
-    - **configurations**: Infrastructure-specific configurations.
-    - **endpoints**: Communication endpoints.
-        - **rest**: Controllers and routes for REST API.
-        - **soap**: SOAP services implementation.
-    - **entities**: Database entities.
-    - **exceptionshandler**: Exception handling in the infrastructure.
-    - **mappers**: Mappers to transform data between application and infrastructure.
-  - **repositories**: Repositories to access data.
-    - **mongodb**: Implementation of repositories for MongoDB.
-    - **mysql**: Implementation of repositories for MySQL.
+- **infrastructure**: Infraestructura de la aplicación.
+    - **adapters**: Adaptadores para conectarse con sistemas externos.
+        - **external**: Integraciones externas.
+        - **persistence**: Capa de persistencia.
+    - **configurations**: Configuraciones específicas de la infraestructura.
+    - **endpoints**: Comunicación de los endpoints.
+        - **rest**: Controladores y rutas para API REST.
+        - **soap**: Implementación de servicios SOAP.
+    - **entities**: Entidades de base de datos.
+    - **exceptionshandler**: Manejo de excepciones en la infraestructura.
+    - **mappers**: Mapeadores para transformar datos entre la aplicación y la infraestructura.
+    - **repositories**: Repositorios para acceder a datos.
+        - **mongodb**: Implementación de repositorios para MongoDB.
+        - **mysql**: Implementación de repositorios para MySQL.
 
 ![img_1.png](diagram.png)
 
-## 📦 Default Dependencies
+## 📦 Dependencias por defecto
 
-* Springframework version 3.1.4: 
+* Springframework version 3.1.4:
 * Gradle 9.0.
 * JUnit 5.
 
@@ -93,26 +93,26 @@ The skeleton uses the following folder structure::
 | junit-vintage         | Test           | ✔️   |
 | h2                    | Test           | ✔️   |
 
-> [Search for more dependencies in gradle](https://docs.gradle.org/current/javadoc/allpackages-index.html)
+> [Buscar más dependencias en gradle](https://docs.gradle.org/current/javadoc/allpackages-index.html)
 
-## 📢 Recommendations and tips for usage.
+## 📢 Recomendaciones y tips para el uso.
 
-* You can delete the .gitkeep archive, it has no application functionality
+* Puede eliminar el archivo .gitkeep, no tiene funcionalidad de aplicación
 
-* The implementation of the business logic, validations or everything related
-to the base operation must go in the domain, it is expected that it will 
-be isolated from technologies.
+* En el dominio va la logica de negocio, validaciones y todo lo relacionado con las funcionalidades
+  basicas, se espera que el dominio este aisaldo de varias tecnologias a excepción de Lombok
 
-* In the .yml or .properties Variables are added for the connection to the database
-or the project port is modified according to the environment **delete the
-configuration file that you do not need.**
-* When connecting for good practices It is recommended to use interfaces, for example in the application, create 
-an interface and implement it in the relevant service class and then in infrastructure in the endpoint/controller 
-inject the interface and thus it would be connected correctly, this applies to: 
-  - Application-infrastructure.
-  - Domain-application.
-  - Infrastructure-domain.
+* En el .yml o .properties se agregan Variables para la conexión a la base de datos
+  o el puerto del proyecto configure los distintos entornos segun su necesidad **elimine el
+  archivo de configuración que no necesita.**
 
-⚠️ **Don't settle for what's there; if there's something unnecessary, rename it or remove it.**
+* Por buenas practicas para conectarse entre capas se recomienta usar interfaces por ejemplo en la aplicación, crear
+  una interfaz e implementarla en la clase de servicio correspondiente y luego en la infraestructura en el
+  endpoint/controlador inyectar la interfaz y así se conectaría correctamente, esto aplica para:
+    - Aplicación-infraestructura.
+    - Aplicación de dominio.
+    - Dominio de infraestructura.
 
-⚠️ **The user module is an example that you can use as a base, if you don't need it you can delete it.**
+⚠️ **No te conformes con lo que hay; si hay algo innecesario, cámbiele el nombre o elimínelo.**
+
+⚠️ **El módulo de usuario es un ejemplo que puedes usar como base, si no lo necesitas puedes eliminarlo.**
