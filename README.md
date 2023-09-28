@@ -113,6 +113,11 @@ El esqueleto utiliza la siguiente estructura de carpetas::
     - Aplicación de dominio.
     - Dominio de infraestructura.
 
+* si desea conectar microservicios hagalo en la infraestructura-adapters-external-feing y las url
+  de los microservicios para conectar el cliente hagalo con variables de entorno en el .yml,
+  en la capa de dominio cree una interfaz de persistencePort en la carpeta ports-out y la implementa en
+  la clase con los metodos de feing
+
 ⚠️ **No te conformes con lo que hay; si hay algo innecesario, cámbiele el nombre o elimínelo.**
 
 ⚠️ **El módulo de usuario es un ejemplo que puedes usar como base, si no lo necesitas puedes eliminarlo.**
