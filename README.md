@@ -118,6 +118,8 @@ El esqueleto utiliza la siguiente estructura de carpetas::
   en la capa de dominio cree una interfaz de persistencePort en la carpeta ports-out y la implementa en
   la clase con los metodos de feing
 
+* Para la creación automática de los beans agregue en cada UseCase la anotación @Component
+
 ⚠️ **No te conformes con lo que hay; si hay algo innecesario, cámbiele el nombre o elimínelo.**
 
 ⚠️ **El módulo de usuario es un ejemplo que puedes usar como base, si no lo necesitas puedes eliminarlo.**

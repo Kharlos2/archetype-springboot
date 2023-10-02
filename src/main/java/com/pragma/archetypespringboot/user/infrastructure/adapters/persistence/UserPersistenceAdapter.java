@@ -17,12 +17,12 @@ public class UserPersistenceAdapter implements UserPersistencePort {
     private final UserEntityMapper userEntityMapper;
 
     @Override
-    public UserModel saveUser(UserModel userModel) {
+    public UserModel save(UserModel userModel) {
         return userEntityMapper.entityToModel(userRepository.save(userEntityMapper.modelToEntity(userModel)));
     }
 
     @Override
-    public UserModel getUserById(Long idUser) {
+    public UserModel getById(Long idUser) {
         return userEntityMapper.entityToModel(userRepository.findById(idUser).orElse(null));
     }
 }

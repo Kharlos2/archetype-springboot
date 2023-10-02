@@ -16,3 +16,6 @@ spring:
       hibernate:
         dialect: org.hibernate.dialect.H2Dialect
       show-sql: true
+  enabled:
+    traceability:
+      allMethods: ${ENABLED_TRACEABILITY_ALL_METHODS:true}
