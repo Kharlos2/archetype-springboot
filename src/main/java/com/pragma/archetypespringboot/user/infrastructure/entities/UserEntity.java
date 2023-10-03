@@ -6,17 +6,24 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.time.LocalDate;
+
 @Entity
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 public class UserEntity {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
     private String name;
-    private Integer age;
+
+    private LocalDate dateBirth;
+
     private String document;
+
     @ManyToOne
     @JsonBackReference
     @JoinColumn(name = "role_id")
