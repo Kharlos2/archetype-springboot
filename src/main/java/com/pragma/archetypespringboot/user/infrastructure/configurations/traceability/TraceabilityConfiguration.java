@@ -1,9 +1,12 @@
 package com.pragma.archetypespringboot.user.infrastructure.configurations.traceability;
 
+import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.*;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
+import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Component;
 
 import java.time.LocalDateTime;
@@ -18,40 +21,16 @@ import java.util.stream.Collectors;
         havingValue = "true",
         matchIfMissing = true
 )
+@RequiredArgsConstructor
 public class TraceabilityConfiguration {
+
+    private final ParametersApplicationConfiguration parametersApplicationConfiguration;
+    private final Environment environment;
 
     @Pointcut("within(com.pragma.archetypespringboot.user.application.services.impl.*) || within(com.pragma.archetypespringboot.user.domain.usecases.*)")
     public void allPublicMethods() {
 
     }
-/*
-    @Before("allPublicMethods()")
-    public void startedMethod(JoinPoint joinPoint) {
-
-        String methodName = joinPoint.getSignature().toShortString();
-        String arguments = Arrays.toString(joinPoint.getArgs());
-
-        HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.currentRequestAttributes()).getRequest();
-        String metodoHttp = request.getMethod();
-
-        log.info("******* Start Request *******");
-        log.info("Started method: " + methodName + " with arguments: " + arguments + " HTTP Method: " + metodoHttp);
-    }
-    @AfterReturning(pointcut = "allPublicMethods()", returning = "result")
-    public void finishedMethod(JoinPoint joinPoint, Object result) {
-        String methodName = joinPoint.getSignature().toShortString();
-        if (result != null) {
-            log.info("Finished Method: " + methodName + " Output arguments: " + result.toString());
-        } else {
-            log.info("Finished Method: " + methodName + " Output arguments: null");
-        }
-
-        log.info("******* End Request *******");
-    }
-*/
-
-
-
     @Before("allPublicMethods()")
     public void startedMethod(JoinPoint joinPoint) throws Throwable {
         if (HttpRequestContextHolder.isNotNull()) {
@@ -62,7 +41,7 @@ public class TraceabilityConfiguration {
 
             TraceabilityDto traceabilityDto = TraceabilityDto
                     .builder()
-                    .application(null)
+                    .application(parametersApplicationConfiguration.getApplicationName())
                     .inputBody(requestContextDto.getBody())
                     .inputParameters(arguments)
                     .GeneralRequestId(requestContextDto.getIdGeneralRequest())
@@ -72,9 +51,9 @@ public class TraceabilityConfiguration {
                     .className(joinPoint.getSourceLocation().getWithinType().getName())
                     .methodName(joinPoint.getSignature().getName())
                     .action(TraceabilityType.METHOD_INIT.toString())
-                    .microservice(null)
+                    .microservice(parametersApplicationConfiguration.getMicroserviceName())
                     .creationDate(LocalDateTime.now())
-                    .environment("local")
+                    .environment(environment.getActiveProfiles()[0].toString())
                     .build();
             log.info(traceabilityDto.toString());
         }
@@ -88,7 +67,7 @@ public class TraceabilityConfiguration {
 
             TraceabilityDto traceabilityDto = TraceabilityDto
                     .builder()
-                    .application(null)
+                    .application(parametersApplicationConfiguration.getApplicationName())
                     .inputBody(requestContextDto.getBody())
                     .inputParameters(arguments)
                     .GeneralRequestId(requestContextDto.getIdGeneralRequest())
@@ -98,9 +77,9 @@ public class TraceabilityConfiguration {
                     .className(joinPoint.getSourceLocation().getWithinType().getName())
                     .methodName(joinPoint.getSignature().getName())
                     .action(TraceabilityType.METHOD_COMPLETE.toString())
-                    .microservice(null)
+                    .microservice(parametersApplicationConfiguration.getMicroserviceName())
                     .creationDate(LocalDateTime.now())
-                    .environment("local")
+                    .environment(environment.getActiveProfiles()[0].toString())
                     .build();
             log.info(traceabilityDto.toString());
         }
