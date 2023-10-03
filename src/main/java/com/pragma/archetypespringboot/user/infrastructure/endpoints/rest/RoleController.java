@@ -1,10 +1,7 @@
 package com.pragma.archetypespringboot.user.infrastructure.endpoints.rest;
 
 import com.pragma.archetypespringboot.user.application.dtos.requests.RoleRequest;
-import com.pragma.archetypespringboot.user.application.dtos.requests.SaveUserRequest;
-import com.pragma.archetypespringboot.user.application.dtos.responses.GenericUserResponse;
 import com.pragma.archetypespringboot.user.application.services.RoleService;
-import com.pragma.archetypespringboot.user.application.services.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
