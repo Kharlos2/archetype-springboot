@@ -13,44 +13,63 @@ import java.time.LocalDateTime;
 @Builder
 public class TraceabilityDto {
 
-    private String aplicativo;
+    private String application;
 
-    @JsonProperty("body_entrada")
-    private String bodyEntrada;
+    @JsonProperty("input_body")
+    private String inputBody;
 
     @JsonProperty("parametros_entrada")
-    private String parametrosEntrada;
+    private String inputParameters;
 
     @JsonProperty("id_peticion_general")
-    private String idPeticionGeneral;
+    private String GeneralRequestId;
 
     @JsonProperty("id_peticion")
-    private String idPeticion;
+    private String requestId;
 
     @JsonProperty("correo_usuario")
-    private String correoUsuario;
+    private String emailUser;
 
     @JsonProperty("url_endpoint")
     private String urlEndpoint;
 
     @JsonProperty("nombre_clase")
-    private String nombreClase;
+    private String className;
 
     @JsonProperty("nombre_metodo")
-    private String nombreMetodo;
+    private String methodName;
 
-    private String accion;
+    private String action;
 
-    private String microservicio;
+    private String microservice;
 
     @JsonProperty("traza_error")
-    private String trazaError;
+    private String traceError;
 
     @JsonProperty("fecha_creacion")
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "YYYY-MM-dd HH:mm:ss .SSS")
-    private LocalDateTime fechaCreacion;
+    private LocalDateTime creationDate;
 
 
     @JsonProperty("ambiente")
-    private String ambiente;
+    private String environment;
+
+    public String toString() {
+        return "TraceabilityDto{" +
+                "application='" + application + '\'' +
+                ", inputBody='" + inputBody + '\'' +
+                ", inputParameters='" + inputParameters + '\'' +
+                ", GeneralRequestId='" + GeneralRequestId + '\'' +
+                ", requestId='" + requestId + '\'' +
+                ", emailUser='" + emailUser + '\'' +
+                ", urlEndpoint='" + urlEndpoint + '\'' +
+                ", className='" + className + '\'' +
+                ", methodName='" + methodName + '\'' +
+                ", action='" + action + '\'' +
+                ", microservice='" + microservice + '\'' +
+                ", creationDate=" + creationDate +
+                ", environment='" + environment + '\'' +
+                '}';
+    }
+
 }

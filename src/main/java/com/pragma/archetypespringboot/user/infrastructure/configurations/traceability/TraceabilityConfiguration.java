@@ -1,15 +1,14 @@
 package com.pragma.archetypespringboot.user.infrastructure.configurations.traceability;
 
-import jakarta.servlet.http.HttpServletRequest;
 import lombok.extern.log4j.Log4j2;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.*;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.stereotype.Component;
-import org.springframework.web.context.request.RequestContextHolder;
-import org.springframework.web.context.request.ServletRequestAttributes;
 
+import java.time.LocalDateTime;
 import java.util.Arrays;
+import java.util.stream.Collectors;
 
 @Aspect
 @Component
@@ -25,6 +24,7 @@ public class TraceabilityConfiguration {
     public void allPublicMethods() {
 
     }
+/*
     @Before("allPublicMethods()")
     public void startedMethod(JoinPoint joinPoint) {
 
@@ -48,10 +48,11 @@ public class TraceabilityConfiguration {
 
         log.info("******* End Request *******");
     }
+*/
 
 
 
- /*   @Before("allPublicMethods()")
+    @Before("allPublicMethods()")
     public void startedMethod(JoinPoint joinPoint) throws Throwable {
         if (HttpRequestContextHolder.isNotNull()) {
 
@@ -61,52 +62,47 @@ public class TraceabilityConfiguration {
 
             TraceabilityDto traceabilityDto = TraceabilityDto
                     .builder()
-                    .aplicativo(null)
-                    .bodyEntrada(requestContextDto.getBody())
-                    .parametrosEntrada(arguments)
-                    .idPeticionGeneral(requestContextDto.getIdGeneralRequest())
-                    .idPeticion(requestContextDto.getIdRequest())
-                    .correoUsuario(requestContextDto.getEmailRequest())
+                    .application(null)
+                    .inputBody(requestContextDto.getBody())
+                    .inputParameters(arguments)
+                    .GeneralRequestId(requestContextDto.getIdGeneralRequest())
+                    .requestId(requestContextDto.getIdRequest())
+                    .emailUser(requestContextDto.getEmailRequest())
                     .urlEndpoint(requestContextDto.getUrl())
-                    .nombreClase(joinPoint.getSourceLocation().getWithinType().getName())
-                    .nombreMetodo(joinPoint.getSignature().getName())
-                    .accion(TraceabilityType.METHOD_INIT.toString())
-                    .microservicio(null)
-                    .fechaCreacion(LocalDateTime.now())
-                    .ambiente("local")
+                    .className(joinPoint.getSourceLocation().getWithinType().getName())
+                    .methodName(joinPoint.getSignature().getName())
+                    .action(TraceabilityType.METHOD_INIT.toString())
+                    .microservice(null)
+                    .creationDate(LocalDateTime.now())
+                    .environment("local")
                     .build();
-
-            logger.info(traceabilityDto.toString());
-            logger.info("prueba");
-
+            log.info(traceabilityDto.toString());
         }
     }
-*/
-    /*@AfterReturning("allPublicMethods()")
+    @AfterReturning("allPublicMethods()")
     public void finishedMethod(JoinPoint joinPoint) throws Throwable {
-        if (HttpRequestContextoHolder.isNotNull()) {
-            RequestContextoDto requestContextoDto = HttpRequestContextoHolder.getRequestHolder();
-            String argumentos = Arrays.asList(joinPoint.getArgs())
+        if (HttpRequestContextHolder.isNotNull()) {
+            RequestContextDto requestContextDto = HttpRequestContextHolder.getRequestHolder();
+            String arguments = Arrays.asList(joinPoint.getArgs())
                     .stream().map(o -> o.toString()).collect(Collectors.joining(" - "));
 
-            TrazabilidadDto trazabilidadDto = TrazabilidadDto
+            TraceabilityDto traceabilityDto = TraceabilityDto
                     .builder()
-                    .aplicativo(parametrosAplicacionConfiguration.getNombreAplicacion())
-                    .bodyEntrada(requestContextoDto.getBody())
-                    .parametrosEntrada(argumentos)
-                    .idPeticionGeneral(requestContextoDto.getIdPeticionGeneral())
-                    .idPeticion(requestContextoDto.getIdPeticion())
-                    .correoUsuario(requestContextoDto.getEmailRequest())
-                    .urlEndpoint(requestContextoDto.getUrl())
-                    .nombreClase(joinPoint.getSourceLocation().getWithinType().getName())
-                    .nombreMetodo(joinPoint.getSignature().getName())
-                    .accion(TipoTrazabilidad.METHOD_COMPLETE.toString())
-                    .microservicio(parametrosAplicacionConfiguration.getNombreMicroservicio())
-                    .fechaCreacion(LocalDateTime.now())
-                    .ambiente(environment.getActiveProfiles()[0].toString())
+                    .application(null)
+                    .inputBody(requestContextDto.getBody())
+                    .inputParameters(arguments)
+                    .GeneralRequestId(requestContextDto.getIdGeneralRequest())
+                    .requestId(requestContextDto.getIdRequest())
+                    .emailUser(requestContextDto.getEmailRequest())
+                    .urlEndpoint(requestContextDto.getUrl())
+                    .className(joinPoint.getSourceLocation().getWithinType().getName())
+                    .methodName(joinPoint.getSignature().getName())
+                    .action(TraceabilityType.METHOD_COMPLETE.toString())
+                    .microservice(null)
+                    .creationDate(LocalDateTime.now())
+                    .environment("local")
                     .build();
-
-            TrazabilidadRequestContextHolder.addTrazabilidadDto(trazabilidadDto);
+            log.info(traceabilityDto.toString());
         }
-    }*/
+    }
 }
