@@ -7,7 +7,6 @@ import com.pragma.archetypespringboot.user.domain.ports.in.RoleServicePort;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
-@Service
 @RequiredArgsConstructor
 public class RoleServiceImpl implements RoleService {
 
