@@ -14,10 +14,10 @@ public class UserServiceImpl implements UserService {
     private final UserDtoMapper userDtoMapper;
     @Override
     public GenericUserResponse save(SaveUserRequest saveUserRequest) {
-        return userDtoMapper.modelToResponse(userServicePort.save(userDtoMapper.requestToModel(saveUserRequest)));
+        return userDtoMapper.modelUserToResponse(userServicePort.save(userDtoMapper.requestToModel(saveUserRequest)));
     }
     @Override
     public GenericUserResponse getById(Long id) {
-        return userDtoMapper.modelToResponse(userServicePort.getById(id));
+        return userDtoMapper.modelUserToResponse(userServicePort.getById(id));
     }
 }

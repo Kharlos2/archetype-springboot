@@ -11,8 +11,8 @@ import org.mapstruct.ReportingPolicy;
         unmappedSourcePolicy = ReportingPolicy.IGNORE)
 public interface UserDtoMapper {
 
-    GenericUserResponse modelToResponse(UserModel userModel);
+    GenericUserResponse modelUserToResponse(UserModel userModel);
 
-    UserModel requestToModel (SaveUserRequest saveUserRequest);
+    UserModel requestToModel(SaveUserRequest saveUserRequest);
 
 }

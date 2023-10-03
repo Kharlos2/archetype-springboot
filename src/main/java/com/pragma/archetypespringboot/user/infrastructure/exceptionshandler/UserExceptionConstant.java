@@ -6,5 +6,10 @@ public class UserExceptionConstant {
     private UserExceptionConstant(){}
 
     public static final String USER_NOT_FOUND_MESSAGE = "User not found";
-    public static final String USER_EMAIL_DUPLICATED_MESSAGE = "Email duplicated";
+    public static final String USER_MINOR_MESSAGE = "You cannot register a minor user";
+    public static final String INVALID_USER_DATE_BIRTH_MESSAGE = "Enter a valid dateBirth, the format is YYYY-MM-DD";
+    public static final String INVALID_USER_PARAMETER_MESSAGE = "The field document cannot be less than 7 and more " +
+            "than 15 characters and must be only numbers";
+    public static final String USER_ALREADY_EXISTS_MESSAGE = "A user already exists with this document";
+
 }

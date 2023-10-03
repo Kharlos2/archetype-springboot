@@ -16,17 +16,17 @@ public class UserPersistenceAdapter implements UserPersistencePort {
 
     @Override
     public UserModel save(UserModel userModel) {
-        return userEntityMapper.entityToModel(userRepository.save(userEntityMapper.modelToEntity(userModel)));
+        return userEntityMapper.entityUserToModel(userRepository.save(userEntityMapper.modelUserToEntity(userModel)));
     }
 
     @Override
     public UserModel getById(Long idUser) {
-        return userEntityMapper.entityToModel(userRepository.findById(idUser).orElse(null));
+        return userEntityMapper.entityUserToModel(userRepository.findById(idUser).orElse(null));
     }
 
     @Override
     public UserModel getUserByDocument(String document){
-        return userEntityMapper.entityToModel(userRepository.findUserByDocument(document).orElse(null));
+        return userEntityMapper.entityUserToModel(userRepository.findUserByDocument(document).orElse(null));
     }
 
 }

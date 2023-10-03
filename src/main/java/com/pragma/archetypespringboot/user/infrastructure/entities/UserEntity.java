@@ -20,7 +20,7 @@ public class UserEntity {
 
     private String name;
 
-    private LocalDate dateBirth;
+    private LocalDate birthDate;
 
     private String document;
 
