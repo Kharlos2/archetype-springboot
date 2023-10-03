@@ -23,4 +23,10 @@ public class UserPersistenceAdapter implements UserPersistencePort {
     public UserModel getById(Long idUser) {
         return userEntityMapper.entityToModel(userRepository.findById(idUser).orElse(null));
     }
+
+    @Override
+    public UserModel getUserByDocument(String document){
+        return userEntityMapper.entityToModel(userRepository.findUserByDocument(document).orElse(null));
+    }
+
 }
