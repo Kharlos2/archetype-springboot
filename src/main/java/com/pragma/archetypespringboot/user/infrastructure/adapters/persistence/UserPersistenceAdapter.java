@@ -6,10 +6,8 @@ import com.pragma.archetypespringboot.user.infrastructure.mappers.UserEntityMapp
 import com.pragma.archetypespringboot.user.infrastructure.repositories.postgresql.UserRepository;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
-import org.springframework.stereotype.Component;
 
 @Transactional
-@Component
 @RequiredArgsConstructor
 public class UserPersistenceAdapter implements UserPersistencePort {
 

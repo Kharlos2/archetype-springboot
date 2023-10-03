@@ -6,9 +6,7 @@ import com.pragma.archetypespringboot.user.application.mappers.UserDtoMapper;
 import com.pragma.archetypespringboot.user.application.services.UserService;
 import com.pragma.archetypespringboot.user.domain.ports.in.UserServicePort;
 import lombok.RequiredArgsConstructor;
-import org.springframework.stereotype.Service;
 
-@Service
 @RequiredArgsConstructor
 public class UserServiceImpl implements UserService {
 
