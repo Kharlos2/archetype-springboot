@@ -40,7 +40,12 @@ public class TraceabilityConfiguration {
     @AfterReturning(pointcut = "allPublicMethods()", returning = "result")
     public void finishedMethod(JoinPoint joinPoint, Object result) {
         String methodName = joinPoint.getSignature().toShortString();
-        log.info("Finished Method: " + methodName + " Output arguments: " + result.toString());
+        if (result != null) {
+            log.info("Finished Method: " + methodName + " Output arguments: " + result.toString());
+        } else {
+            log.info("Finished Method: " + methodName + " Output arguments: null");
+        }
+
         log.info("******* End Request *******");
     }
 
