@@ -21,6 +21,6 @@ public class UserController {
     }
     @GetMapping("/get/{idUser}")
     public ResponseEntity<GenericUserResponse> getById(@PathVariable Long idUser) {
-        return ResponseEntity.status(HttpStatus.ACCEPTED).body(userService.getById(idUser));
+        return ResponseEntity.status(HttpStatus.OK).body(userService.getById(idUser));
     }
 }

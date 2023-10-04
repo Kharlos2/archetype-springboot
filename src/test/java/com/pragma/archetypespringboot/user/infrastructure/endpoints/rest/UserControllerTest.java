@@ -1,59 +1,64 @@
 package com.pragma.archetypespringboot.user.infrastructure.endpoints.rest;
 
-import com.pragma.archetypespringboot.user.application.dtos.requests.SaveUserRequest;
-import com.pragma.archetypespringboot.user.application.dtos.responses.GenericUserResponse;
-import com.pragma.archetypespringboot.user.application.services.UserService;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
+import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.MvcResult;
+import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
+import org.springframework.test.web.servlet.setup.MockMvcBuilders;
+import org.springframework.web.context.WebApplicationContext;
 
 
-import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.when;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 
+@SpringBootTest
+@WebAppConfiguration
 class UserControllerTest {
-    @Autowired
+
+    private final static String SAVE_URL = "/api/v1/save-user";
+    private final static String GET_URL = "/api/v1/get/{idUser}";
     private MockMvc mockMvc;
 
-    @MockBean
-    private UserService userService;
+    @Autowired
+    private WebApplicationContext webApplicationContext;
+
+    @BeforeEach
+    void setUp() {
+        mockMvc = MockMvcBuilders.webAppContextSetup(webApplicationContext).build();
+    }
 
     @Test
-    public void testSaveUserEndpoint() throws Exception {
-        // Configura el comportamiento del servicio mock
-        SaveUserRequest request = new SaveUserRequest();
-        request.setName("John Doe");
-        request.setDocument("1234567890");
-        request.setBirthDate("1990-01-01");
+    void testSaveUserEndpoint() throws Exception {
 
-        GenericUserResponse expectedResponse = new GenericUserResponse();
-        expectedResponse.setName("John Doe");
+        MvcResult result = mockMvc.perform(MockMvcRequestBuilders.post(SAVE_URL)
+                .accept(MediaType.APPLICATION_JSON_VALUE)
+                        .contentType(MediaType.APPLICATION_JSON_VALUE)
+                        .content("{\"name\":\"Carlos\",\"birthDate\":\"2005-02-18\",\"document\":\"123495\"}"))
+                .andReturn();
+        assertEquals(201,result.getResponse().getStatus());
+        String content = result.getResponse().getContentAsString();
 
-        when(userService.save(any(SaveUserRequest.class))).thenReturn(expectedResponse);
-
-        // Realiza una solicitud POST simulada
-        mockMvc.perform(post("/api/v1/save-user")
-                        .contentType(MediaType.APPLICATION_JSON)
-                        .content(objectMapper.writeValueAsString(request)))
-                .andExpect(status().isCreated())
-                .andExpect(content().contentType(MediaType.APPLICATION_JSON))
-                .andExpect(jsonPath("$.id").value(expectedResponse.getId()))
-                .andExpect(jsonPath("$.name").value(expectedResponse.getName()));
+        assertThat(content).contains("Carlos").contains("2005-02-18").contains("123495");
     }
     @Test
-    public void testGetUserByIdEndpoint() throws Exception {
-        // Configura el comportamiento del servicio mock
-        when(userService.getById(1L)).thenReturn(/* respuesta esperada */);
+    void testGetUserByIdEndpoint() throws Exception {
 
-        // Realiza una solicitud GET simulada
-        mockMvc.perform(get("/api/v1/get/{idUser}", 1))
-                .andExpect(status().isAccepted())
-                .andExpect(/* verificar cuerpo de respuesta */);
+        testSaveUserEndpoint();
+
+        MvcResult result = mockMvc.perform(MockMvcRequestBuilders.get(GET_URL, 1))
+                .andExpect(status().isOk())
+                .andExpect(content().contentType(MediaType.APPLICATION_JSON))
+                .andReturn();
+
+        String content = result.getResponse().getContentAsString();
+        assertThat(content).contains("Carlos").contains("2005-02-18").contains("123495");
     }
 
 }
