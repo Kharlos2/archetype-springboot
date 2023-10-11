@@ -15,7 +15,7 @@ capas de la aplicación y promover buenas prácticas.
 ## 🚀 Como usar este arquetipo
 
 1. Instala Java SE Development Kit 11.0.19. [Downloader](https://www.oracle.com/co/java/technologies/javase/jdk11-archive-downloads.html#license-lightbox)
-2. Clona este repositorio: `git clone https://github.com/pragma/webflux-archetype.git`
+2. Clona este repositorio: `git clone https://github.com/Kharlos2/archetype-springboot.git`
 3. Ejecute algunas [tareas del ciclo de vida de Gradle](https://docs.gradle.org/current/userguide/java_plugin.html#lifecycle_tasks) en orden para verificar que todo este OK:
     1. Cree [el JAR del proyecto](https://docs.gradle.org/current/userguide/java_plugin.html#sec:jar) y otros artefactos del proyecto:
        `./gradlew assemble --warning-mode all`
