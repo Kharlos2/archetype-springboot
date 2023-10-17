@@ -1,4 +1,4 @@
-package com.pragma.archetypespringboot.user.infrastructure.configurations.traceability;
+package com.pragma.archetypespringboot.configurations.traceability.http;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

@@ -1,4 +1,4 @@
-package com.pragma.archetypespringboot.user.infrastructure.configurations.beans;
+package com.pragma.archetypespringboot.configurations.beans;
 
 import org.springframework.context.annotation.ImportSelector;
 import org.springframework.core.type.AnnotationMetadata;
@@ -7,20 +7,14 @@ import org.springframework.util.StringUtils;
 import java.util.Arrays;
 import java.util.logging.Logger;
 
-import static com.pragma.archetypespringboot.user.infrastructure.configurations.beans.ScannerClasses.scannerClasses;
-
 public class BeanImportSelector implements ImportSelector {
-
-  public String useCaseRoute = "com.pragma.archetypespringboot.user.domain.usecases";
-  public String serviceRoute = "com.pragma.archetypespringboot.user.application.services.impl";
-  public String adaptersRoute = "com.pragma.archetypespringboot.user.infrastructure.adapters";
 
   @Override
   public String[] selectImports(AnnotationMetadata importingClassMetadata) {
 
-    String[] useCaseClasses = scannerClasses(useCaseRoute);
-    String[] serviceClasses = scannerClasses(serviceRoute);
-    String[] adapterClasses = scannerClasses(adaptersRoute);
+    String[] useCaseClasses = ScannerClasses.scannerClasses(USE_CASE_ROUTE);
+    String[] serviceClasses = ScannerClasses.scannerClasses(SERVICE_ROUTE);
+    String[] adapterClasses = ScannerClasses.scannerClasses(ADAPTER_ROUTE);
 
     String[] totalScanner = Arrays.copyOf(useCaseClasses, useCaseClasses.length + serviceClasses.length + adapterClasses.length);
     System.arraycopy(serviceClasses, 0, totalScanner, useCaseClasses.length, serviceClasses.length);

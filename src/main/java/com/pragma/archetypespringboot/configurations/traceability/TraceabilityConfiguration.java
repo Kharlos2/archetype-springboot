@@ -1,10 +1,17 @@
-package com.pragma.archetypespringboot.user.infrastructure.configurations.traceability;
+package com.pragma.archetypespringboot.configurations.traceability;
 
+import com.pragma.archetypespringboot.commons.configurations.traceability.filter.ParametersApplicationConfiguration;
+import com.pragma.archetypespringboot.commons.configurations.traceability.filter.TraceabilityDto;
+import com.pragma.archetypespringboot.commons.configurations.traceability.http.HttpRequestContextHolder;
+import com.pragma.archetypespringboot.commons.configurations.traceability.http.RequestContextDto;
+import com.pragma.archetypespringboot.commons.configurations.traceability.util.TraceabilityType;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.aspectj.lang.JoinPoint;
-import org.aspectj.lang.annotation.*;
-import org.springframework.beans.factory.annotation.Value;
+import org.aspectj.lang.annotation.AfterReturning;
+import org.aspectj.lang.annotation.Aspect;
+import org.aspectj.lang.annotation.Before;
+import org.aspectj.lang.annotation.Pointcut;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Component;
@@ -27,7 +34,7 @@ public class TraceabilityConfiguration {
     private final ParametersApplicationConfiguration parametersApplicationConfiguration;
     private final Environment environment;
 
-    @Pointcut("within(com.pragma.archetypespringboot.user.application.services.impl.*) || within(com.pragma.archetypespringboot.user.domain.usecases.*)")
+    @Pointcut("within(com.pragma.archetypespringboot.*.application.services.impl.*) || within(com.pragma.archetypespringboot.*.domain.usecases.*)")
     public void allPublicMethods() {
 
     }
@@ -44,7 +51,7 @@ public class TraceabilityConfiguration {
                     .application(parametersApplicationConfiguration.getApplicationName())
                     .inputBody(requestContextDto.getBody())
                     .inputParameters(arguments)
-                    .GeneralRequestId(requestContextDto.getIdGeneralRequest())
+                    .generalRequestId(requestContextDto.getIdGeneralRequest())
                     .requestId(requestContextDto.getIdRequest())
                     .emailUser(requestContextDto.getEmailRequest())
                     .urlEndpoint(requestContextDto.getUrl())
@@ -53,7 +60,7 @@ public class TraceabilityConfiguration {
                     .action(TraceabilityType.METHOD_INIT.toString())
                     .microservice(parametersApplicationConfiguration.getMicroserviceName())
                     .creationDate(LocalDateTime.now())
-                    .environment(environment.getActiveProfiles()[0].toString())
+                    .environment(environment.getActiveProfiles()[0])
                     .build();
             log.info(traceabilityDto.toString());
         }
@@ -70,7 +77,7 @@ public class TraceabilityConfiguration {
                     .application(parametersApplicationConfiguration.getApplicationName())
                     .inputBody(requestContextDto.getBody())
                     .inputParameters(arguments)
-                    .GeneralRequestId(requestContextDto.getIdGeneralRequest())
+                    .generalRequestId(requestContextDto.getIdGeneralRequest())
                     .requestId(requestContextDto.getIdRequest())
                     .emailUser(requestContextDto.getEmailRequest())
                     .urlEndpoint(requestContextDto.getUrl())
@@ -79,7 +86,7 @@ public class TraceabilityConfiguration {
                     .action(TraceabilityType.METHOD_COMPLETE.toString())
                     .microservice(parametersApplicationConfiguration.getMicroserviceName())
                     .creationDate(LocalDateTime.now())
-                    .environment(environment.getActiveProfiles()[0].toString())
+                    .environment(environment.getActiveProfiles()[0])
                     .build();
             log.info(traceabilityDto.toString());
         }

@@ -1,4 +1,4 @@
-package com.pragma.archetypespringboot.user.infrastructure.configurations.traceability;
+package com.pragma.archetypespringboot.configurations.traceability.filter;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -18,40 +18,40 @@ public class TraceabilityDto {
     @JsonProperty("input_body")
     private String inputBody;
 
-    @JsonProperty("parametros_entrada")
+    @JsonProperty("input_parameters")
     private String inputParameters;
 
-    @JsonProperty("id_peticion_general")
-    private String GeneralRequestId;
+    @JsonProperty("general_request_id")
+    private String generalRequestId;
 
-    @JsonProperty("id_peticion")
+    @JsonProperty("request_id")
     private String requestId;
 
-    @JsonProperty("correo_usuario")
+    @JsonProperty("email_user")
     private String emailUser;
 
     @JsonProperty("url_endpoint")
     private String urlEndpoint;
 
-    @JsonProperty("nombre_clase")
+    @JsonProperty("class_name")
     private String className;
 
-    @JsonProperty("nombre_metodo")
+    @JsonProperty("method_name")
     private String methodName;
 
     private String action;
 
     private String microservice;
 
-    @JsonProperty("traza_error")
+    @JsonProperty("trace_error")
     private String traceError;
 
-    @JsonProperty("fecha_creacion")
+    @JsonProperty("creation_date")
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "YYYY-MM-dd HH:mm:ss .SSS")
     private LocalDateTime creationDate;
 
 
-    @JsonProperty("ambiente")
+    @JsonProperty("environment")
     private String environment;
 
     public String toString() {
@@ -59,7 +59,7 @@ public class TraceabilityDto {
                 "application='" + application + '\'' +
                 ", inputBody='" + inputBody + '\'' +
                 ", inputParameters='" + inputParameters + '\'' +
-                ", GeneralRequestId='" + GeneralRequestId + '\'' +
+                ", generalRequestId='" + generalRequestId + '\'' +
                 ", requestId='" + requestId + '\'' +
                 ", emailUser='" + emailUser + '\'' +
                 ", urlEndpoint='" + urlEndpoint + '\'' +
